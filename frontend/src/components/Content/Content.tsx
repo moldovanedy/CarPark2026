@@ -1,43 +1,45 @@
-import "./Content.css"
-import { CarItem } from "../CarItem/CarItem"
-import { useFilters } from "../../hooks/useFilters"
-import { FiltersPanel } from "../FiltersPanel/FiltersPanel"
-import { SortingPanel } from "../SortingPanel/SortingPanel"
-import { useCarsList } from "../../hooks/useCarsList"
-import { Pagination } from "../Pagination/Pagination"
+import "./Content.css";
+import { CarItem } from "../CarItem/CarItem";
+import { useFilters } from "../../hooks/useFilters";
+import { FiltersPanel } from "../FiltersPanel/FiltersPanel";
+import { SortingPanel } from "../SortingPanel/SortingPanel";
+import { useCarsList } from "../../hooks/useCarsList";
+import { Pagination } from "../Pagination/Pagination";
 
 export function Content() {
-    const { filters } = useFilters()
-    const { carsList, isLoading, isError } = useCarsList()
+  const { filters } = useFilters();
+  const { carsList, isLoading, isError } = useCarsList();
 
-    const filteredCarsList = carsList.filter((car) => {
-        const filteredManufacturer = filters.manufacturer === "" ||
-            car.manufacturer.includes(filters.manufacturer)
+  const filteredCarsList = carsList.filter((car) => {
+    const filteredManufacturer =
+      filters.manufacturer === "" ||
+      car.manufacturer
+        .toLowerCase()
+        .includes(filters.manufacturer.toLowerCase());
 
-        return filteredManufacturer
-    })
+    return filteredManufacturer;
+  });
 
-    return (
-        <div className="Content">
-            <FiltersPanel />
+  return (
+    <div className="Content">
+      <FiltersPanel />
 
-            <SortingPanel />
+      <SortingPanel />
 
-            {isLoading && <p>Data is loading...</p>}
-            {isError && <p>Something went wrong</p>}
+      {isLoading && <p>Data is loading...</p>}
+      {isError && <p>Something went wrong</p>}
 
-            {!isLoading && !isError && (
-                <div className="CarList">
+      {!isLoading && !isError && (
+        <div className="CarList">
+          <Pagination />
 
-                    <Pagination />
+          {filteredCarsList.map((car) => (
+            <CarItem key={car.vin} car={car} />
+          ))}
 
-                    {filteredCarsList.map((car) => (
-                        <CarItem key={car.vin} car={car} />
-                    ))}
-
-                    <Pagination />
-                </div>
-            )}
+          <Pagination />
         </div>
-    )
+      )}
+    </div>
+  );
 }

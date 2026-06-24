@@ -1,12 +1,11 @@
-import './Pagination.css'
+import "./Pagination.css";
 
 export function Pagination() {
+  // const pages = [1, 2, 3, 4, 5]
 
-    const pages = [1, 2, 3, 4, 5]
-
-    return (
-        <div className="Pagination">
-            {/* <button
+  return (
+    <div className="Pagination">
+      {/* <button
                 type="button"
                 className="Pagination__button"
                 onClick={() => {}}
@@ -34,6 +33,6 @@ export function Pagination() {
             >
                 Next
             </button> */}
-        </div>
-    )
+    </div>
+  );
 }
