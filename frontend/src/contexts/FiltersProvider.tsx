@@ -1,42 +1,50 @@
-
 import { useState } from "react";
 import type { PropsWithChildren } from "react";
-import type { Filters } from "./FiltersContext";
+import type { Filters, FiltersContextType } from "./FiltersContext";
 import { FiltersContext } from "./FiltersContext";
 
 const defaultFilters: Filters = {
     manufacturer: "",
-}
+};
 
 export function FiltersProvider({ children }: PropsWithChildren) {
-    const [filters, setFilters] = useState<Filters>(defaultFilters)
+    const [filters, setFilters] = useState<Filters>(defaultFilters);
+
+    const [page, setPage] = useState<number>(1);
+    const [numTotalPages, setNumTotalPages] = useState<number>(1);
+    const [limit, setLimit] = useState<number>(10);
 
     const updateFilter = (field: keyof Filters, value: string) => {
-        setFilters(prev => ({ ...prev, [field]: value }))
-    }
+        setFilters((prev) => ({ ...prev, [field]: value }));
+    };
 
-    const resetFilters = () => setFilters(defaultFilters)
-    
-    const context = {
+    const resetFilters = () => setFilters(defaultFilters);
+
+    const context: FiltersContextType = {
         filters,
         setFilters,
         updateFilter,
         resetFilters,
-        // page,
-        // setPage,
-        // limit,
-        // setLimit,
+
+        page,
+        setPage,
+        numTotalPages,
+        setNumTotalPages,
+        limit,
+        setLimit,
+
         // sort,
         // setSort,
         // order,
         // setOrder,
-        showFavoritesOnly: false, 
-        handleFavoritesToggle: () => {}
-    }
+
+        showFavoritesOnly: false,
+        handleFavoritesToggle: () => {},
+    };
 
     return (
         <FiltersContext.Provider value={context}>
             {children}
         </FiltersContext.Provider>
-    )
+    );
 }
