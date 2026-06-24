@@ -1,41 +1,52 @@
 import { useEffect, useState } from "react";
 import type { PropsWithChildren } from "react";
-import { getCars } from "../data/car";
+import { getCars, type GetCarsParams } from "../data/car";
 import type { Car } from "../models/car";
 import { CarListContext } from "./CarListContext";
+import { useFilters } from "../hooks/useFilters";
 
 export function CarListProvider({ children }: PropsWithChildren) {
-  const [carsList, setCarsList] = useState<Car[]>([]);
+    const [carsList, setCarsList] = useState<Car[]>([]);
 
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+    const { filters, page, limit, setNumTotalPages } = useFilters();
 
-  const getCarList = async () => {
-    setIsLoading(true);
-    setIsError(false);
-    try {
-      const result = await getCars();
-      setCarsList(result.items);
-    } catch {
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    const [isError, setIsError] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    getCarList();
-  }, []);
+    const getCarList = async () => {
+        setIsLoading(true);
+        setIsError(false);
 
-  const context = {
-    carsList,
-    isError,
-    isLoading,
-  };
+        try {
+            const carParams: GetCarsParams = {
+                filters: filters,
+                page,
+                limit,
+            };
 
-  return (
-    <CarListContext.Provider value={context}>
-      {children}
-    </CarListContext.Provider>
-  );
+            const result = await getCars(carParams);
+            setNumTotalPages(result.totalPages);
+            setCarsList(result.items);
+        } catch {
+            setIsError(true);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getCarList();
+    }, [page, limit]);
+
+    const context = {
+        carsList,
+        isError,
+        isLoading,
+    };
+
+    return (
+        <CarListContext.Provider value={context}>
+            {children}
+        </CarListContext.Provider>
+    );
 }

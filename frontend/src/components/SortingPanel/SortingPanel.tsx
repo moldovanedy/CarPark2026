@@ -15,11 +15,11 @@ import "./SortingPanel.css";
 // const PAGE_SIZES = [5, 10, 20, 50]
 
 export function SortingPanel() {
-  // const order: string = "asc"
+    // const order: string = "asc"
 
-  return (
-    <div className="SortingPanel">
-      {/* <label className="SortingPanel__field">
+    return (
+        <div className="SortingPanel">
+            {/* <label className="SortingPanel__field">
                 <span className="SortingPanel__label">Sort by</span>
                 <div className="SortingPanel__select">
                     <select
@@ -63,6 +63,6 @@ export function SortingPanel() {
                     </select>
                 </div>
             </label> */}
-    </div>
-  );
+        </div>
+    );
 }
