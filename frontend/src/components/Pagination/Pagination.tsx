@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFilters } from "../../hooks/useFilters";
 import "./Pagination.css";
+import { Button } from "@mui/material";
 
 export function Pagination() {
     const [pagesArray, setPagesArray] = useState<number[]>([]);
@@ -37,10 +38,13 @@ export function Pagination() {
     }, []);
 
     return (
-        <div className="Pagination">
-            <button
-                type="button"
-                className="Pagination__button"
+        <div className="pagination">
+            <span style={{ fontWeight: "bold" }}>Page:</span>
+            <span></span>
+
+            <Button
+                variant="contained"
+                className="pagination__control-button"
                 onClick={() => {
                     if (page > 1) {
                         setPage(page - 1);
@@ -49,19 +53,19 @@ export function Pagination() {
                 disabled={page === 1}
             >
                 Prev
-            </button>
+            </Button>
 
             {hasBackEllipsis ? (
                 <>
-                    <button
-                        type="button"
-                        className={`Pagination__button`}
+                    <Button
+                        variant="outlined"
+                        className={"pagination__button"}
                         onClick={() => {
                             setPage(1);
                         }}
                     >
                         1
-                    </button>
+                    </Button>
                     <span>...</span>
                 </>
             ) : (
@@ -69,10 +73,10 @@ export function Pagination() {
             )}
 
             {pagesArray.map((p) => (
-                <button
+                <Button
                     key={p}
-                    type="button"
-                    className={`Pagination__button${p === page ? " Pagination__button--active" : ""}`}
+                    variant="outlined"
+                    className={`pagination__button${p === page ? " pagination__button--active" : ""}`}
                     onClick={() => {
                         if (p >= 1 && p <= numTotalPages) {
                             setPage(p);
@@ -80,29 +84,29 @@ export function Pagination() {
                     }}
                 >
                     {p}
-                </button>
+                </Button>
             ))}
 
             {hasForwardEllipsis ? (
                 <>
                     <span>...</span>
-                    <button
-                        type="button"
-                        className={`Pagination__button`}
+                    <Button
+                        variant="outlined"
+                        className={"pagination__button"}
                         onClick={() => {
                             setPage(numTotalPages);
                         }}
                     >
                         {numTotalPages}
-                    </button>
+                    </Button>
                 </>
             ) : (
                 <></>
             )}
 
-            <button
-                type="button"
-                className="Pagination__button"
+            <Button
+                variant="contained"
+                className="pagination__control-button"
                 onClick={() => {
                     if (page < numTotalPages) {
                         setPage(page + 1);
@@ -111,7 +115,7 @@ export function Pagination() {
                 disabled={page === numTotalPages}
             >
                 Next
-            </button>
+            </Button>
         </div>
     );
 }

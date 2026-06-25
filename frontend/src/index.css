@@ -1,15 +1,43 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  color: #1f2933;
-  background-color: #f5f7fa;
+    --surface1: #f8f8f8;
+    --surface2: #efefef;
+    --surface3: #dedede;
+
+    --on-primary: rgb(255 255 255);
+    --on-secondary: rgb(255 255 255);
+    --on-surface: rgb(23 28 31);
+
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: var(--on-surface);
+    background-color: var(--mui-palette-common-background);
+}
+
+:root.light {
+    --surface1: #f8f8f8;
+    --surface2: #efefef;
+    --surface3: #dedede;
+
+    --on-primary: rgb(255 255 255);
+    --on-secondary: rgb(255 255 255);
+    --on-surface: rgb(23 28 31);
+}
+
+:root.dark {
+    --surface1: #212121;
+    --surface2: #313131;
+    --surface3: #424242;
+
+    --on-primary: rgb(0 53 67);
+    --on-secondary: rgb(29 51 59);
+    --on-surface: rgb(222 227 230);
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
+    margin: 0;
+    min-height: 100vh;
 }

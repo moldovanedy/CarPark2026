@@ -1,10 +1,11 @@
 import "./Content.css";
 import { CarItem } from "../CarItem/CarItem";
 import { useFilters } from "../../hooks/useFilters";
-import { FiltersPanel } from "../FiltersPanel/FiltersPanel";
+import { Header } from "../Header/Header";
 import { SortingPanel } from "../SortingPanel/SortingPanel";
 import { useCarsList } from "../../hooks/useCarsList";
 import { Pagination } from "../Pagination/Pagination";
+import { Grid } from "@mui/material";
 
 export function Content() {
     const { filters } = useFilters();
@@ -21,8 +22,8 @@ export function Content() {
     });
 
     return (
-        <div className="Content">
-            <FiltersPanel />
+        <div className="content">
+            <Header />
 
             <SortingPanel />
 
@@ -30,15 +31,25 @@ export function Content() {
             {isError && <p>Something went wrong</p>}
 
             {!isLoading && !isError && (
-                <div className="CarList">
-                    <Pagination />
+                <>
+                    <div className="filter-and-sort">
+                        <Pagination />
+                    </div>
 
-                    {filteredCarsList.map((car) => (
-                        <CarItem key={car.vin} car={car} />
-                    ))}
+                    <Grid
+                        container
+                        spacing={2}
+                        sx={{ justifyContent: "center", alignItems: "stretch" }}
+                    >
+                        {filteredCarsList.map((car) => (
+                            <CarItem key={car.vin} car={car} />
+                        ))}
+                    </Grid>
 
-                    <Pagination />
-                </div>
+                    <div className="filter-and-sort">
+                        <Pagination />
+                    </div>
+                </>
             )}
         </div>
     );

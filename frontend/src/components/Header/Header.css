@@ -1,0 +1,11 @@
+.filtersPanel {
+    background-color: var(--surface1);
+    padding: 5px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

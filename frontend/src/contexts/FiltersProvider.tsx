@@ -12,7 +12,7 @@ export function FiltersProvider({ children }: PropsWithChildren) {
 
     const [page, setPage] = useState<number>(1);
     const [numTotalPages, setNumTotalPages] = useState<number>(1);
-    const [limit, setLimit] = useState<number>(10);
+    const [limit, setLimit] = useState<number>(50);
 
     const updateFilter = (field: keyof Filters, value: string) => {
         setFilters((prev) => ({ ...prev, [field]: value }));

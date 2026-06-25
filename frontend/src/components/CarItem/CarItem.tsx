@@ -2,72 +2,78 @@ import type { Car } from "../../models/car";
 import "./CarItem.css";
 import { useFavorites } from "../../hooks/useFavorites";
 import { IMG_BASE_URL } from "../../data/constants";
+import {
+    Button,
+    Card,
+    CardContent,
+    CardMedia,
+    Grid,
+    IconButton,
+    Typography,
+} from "@mui/material";
+import Favorite from "@mui/icons-material/Favorite";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import { ShoppingCart } from "@mui/icons-material";
 
 type Props = {
     car: Car;
 };
 
 export function CarItem({ car }: Props) {
-    const equipments = car.equipment.split(",");
     const { toggleFavorite, isFavorite } = useFavorites();
 
     return (
-        <div className="carItem">
-            <div className="imageContainer">
-                <img
-                    src={`${IMG_BASE_URL}/${car.image}`}
-                    className="carImage"
-                />
-            </div>
-            <div className="details">
-                <div className="row">
-                    <div className="label">Manufacturer: </div>{" "}
-                    {car.manufacturer}
+        <Grid>
+            <Card variant="elevation" className="card">
+                <div style={{ position: "relative" }}>
+                    <CardMedia
+                        component="img"
+                        className="carImage"
+                        src={`${IMG_BASE_URL}/${car.image}`}
+                    />
+
+                    <div className="card__favorite-button-wrapper">
+                        <IconButton onClick={() => toggleFavorite(car)}>
+                            {isFavorite(car) ? (
+                                <Favorite color="error" />
+                            ) : (
+                                <FavoriteBorder color="error" />
+                            )}
+                        </IconButton>
+                    </div>
                 </div>
-                <div className="row">
-                    <div className="label">Model: </div>
-                    {car.model}
-                </div>
-                <div className="row">
-                    <div className="label">Construction Year: </div>
-                    {car.constructionYear}
-                </div>
-                <div className="row">
-                    <div className="label">Fuel type: </div>
-                    {car.fuelType}
-                </div>
-                <div className="row">
-                    <div className="label">Mileage: </div>
-                    {car.mileage} km
-                </div>
-                <div className="row">
-                    <div className="label">Engine size: </div>
-                    {car.engineSize} cm3
-                </div>
-                <div className="row">
-                    <div className="label">Power: </div>
-                    {car.power} CP
-                </div>
-                <br />
-                <div className="row">
-                    <div className="label">Equipments:</div>
-                </div>
-                <div className="row">
-                    <ul className="list">
-                        {equipments.slice(0, 9).map((equipment, index) => {
-                            return <li key={index}>{equipment}</li>;
-                        })}
-                    </ul>
-                </div>
-            </div>
-            <div className="price">Price: {car.price} EUR</div>
-            <div className="row">
-                <button className="button" onClick={() => toggleFavorite(car)}>
-                    {isFavorite(car)
-                        ? "Remove from favorites"
-                        : "Add to favorites"}
-                </button>
-            </div>
-        </div>
+
+                <CardContent className="card__content">
+                    <Typography variant="h5" sx={{ marginBottom: 1 }}>
+                        {car.manufacturer} {car.model} {car.constructionYear}
+                    </Typography>
+
+                    <Typography sx={{ marginBottom: 1 }}>
+                        {car.fuelType} &#x2022; {car.mileage} km &#x2022;{" "}
+                        {car.engineSize != 0 ? (
+                            <>{car.engineSize} cm3 &#x2022;</>
+                        ) : (
+                            <></>
+                        )}{" "}
+                        {car.power} HP
+                    </Typography>
+
+                    <div style={{ flexGrow: 1 }}></div>
+
+                    <div className="row" style={{ justifyContent: "flex-end" }}>
+                        <Typography className="price">
+                            {car.price} EUR
+                        </Typography>
+
+                        <div style={{ flexGrow: 1 }}></div>
+
+                        <Button variant="contained">
+                            <ShoppingCart />
+                            <span>Add to cart</span>
+                        </Button>
+                    </div>
+                </CardContent>
+            </Card>
+        </Grid>
     );
 }
