@@ -1,15 +1,14 @@
-import { apiHandle, HEADERS } from "./helper"
-import { API_BASE_URL } from "./constants"
-import type { Basket } from "../models/basket"
-
+import { apiHandle, HEADERS } from "./helper";
+import { API_BASE_URL } from "./constants";
+import type { Basket } from "../models/basket";
 
 /**
  * Gets all cars
  * @returns Array of all cars
  */
 export async function getBasket(): Promise<Basket[]> {
-    const res = await fetch(`${API_BASE_URL}/basket`)
-    return apiHandle<Basket[]>(res)
+    const res = await fetch(`${API_BASE_URL}/basket`);
+    return apiHandle<Basket[]>(res);
 }
 
 /**
@@ -20,11 +19,11 @@ export async function getBasket(): Promise<Basket[]> {
 
 export async function createBasket(basket: Basket): Promise<Basket> {
     const res = await fetch(`${API_BASE_URL}/basket`, {
-        method: 'POST',
+        method: "POST",
         headers: HEADERS,
         body: JSON.stringify(basket),
-    })
-    return apiHandle<Basket>(res)
+    });
+    return apiHandle<Basket>(res);
 }
 
 /**
@@ -35,11 +34,11 @@ export async function createBasket(basket: Basket): Promise<Basket> {
  */
 export async function updateBasket(basket: Basket): Promise<Basket> {
     const res = await fetch(`${API_BASE_URL}/basket/${basket.vin}`, {
-        method: 'PATCH',
+        method: "PATCH",
         headers: HEADERS,
         body: JSON.stringify(basket),
-    })
-    return apiHandle<Basket>(res)
+    });
+    return apiHandle<Basket>(res);
 }
 
 /**
@@ -50,11 +49,11 @@ export async function updateBasket(basket: Basket): Promise<Basket> {
  */
 export async function replaceBasket(basket: Basket): Promise<Basket> {
     const res = await fetch(`${API_BASE_URL}/basket/${basket.vin}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: HEADERS,
         body: JSON.stringify(basket),
-    })
-    return apiHandle<Basket>(res)
+    });
+    return apiHandle<Basket>(res);
 }
 
 /**
@@ -62,8 +61,11 @@ export async function replaceBasket(basket: Basket): Promise<Basket> {
  * @param vin - Vehicle Identification Number of the car to delete
  */
 export async function deleteBasket(id: string): Promise<void> {
-    const res = await fetch(`${API_BASE_URL}/basket/${id}`, { method: 'DELETE', headers: HEADERS })
+    const res = await fetch(`${API_BASE_URL}/basket/${id}`, {
+        method: "DELETE",
+        headers: HEADERS,
+    });
     if (!res.ok) {
-        throw new Error(`Delete failed: ${res.status} ${res.statusText}`)
+        throw new Error(`Delete failed: ${res.status} ${res.statusText}`);
     }
 }

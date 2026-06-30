@@ -5,9 +5,10 @@
 }
 
 .filter-and-sort {
+    width: calc(100% - 32px);
     margin: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    align-self: flex-end;
+    align-self: center;
 }

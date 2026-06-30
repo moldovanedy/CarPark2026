@@ -1,6 +1,7 @@
-import type { Car } from "../models/car";
+import type { Car } from "../models/Car";
 import { apiHandle, HEADERS } from "./helper";
 import { API_BASE_URL } from "./constants";
+import type { Filters } from "../contexts/FiltersContext";
 
 export type SortOrder = "asc" | "desc";
 
@@ -9,7 +10,7 @@ export type GetCarsParams = {
     order?: SortOrder;
     page?: number;
     limit?: number;
-    filters?: Partial<Record<keyof Car, string>>;
+    filters?: Filters;
 };
 
 export type Paginated<T> = {
@@ -42,8 +43,40 @@ export async function getCars(
     const limit = limitOpt ?? 0;
 
     for (const [key, value] of Object.entries(filters)) {
-        if (value !== undefined && value !== "") {
-            query.set(`${key}_like`, value);
+        if (value === undefined) {
+            continue;
+        }
+
+        switch (key) {
+            case "manufacturers":
+            case "models":
+            case "fuelTypes":
+            case "gearboxes": {
+                let fieldName = key.substring(0, key.length - 1);
+                (value as string[]).forEach((val) => {
+                    query.set(`${fieldName}`, val);
+                });
+
+                break;
+            }
+
+            case "minPrice":
+            case "minMileage":
+            case "minConstructionYear":
+            case "minEngineSize": {
+                let fieldName = key.charAt(3).toLowerCase() + key.substring(4);
+                query.set(`${fieldName}_gte`, (value as number).toString());
+                break;
+            }
+
+            case "maxPrice":
+            case "maxMileage":
+            case "maxConstructionYear":
+            case "maxEngineSize": {
+                let fieldName = key.charAt(3).toLowerCase() + key.substring(4);
+                query.set(`${fieldName}_lte`, (value as number).toString());
+                break;
+            }
         }
     }
 

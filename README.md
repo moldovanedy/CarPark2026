@@ -49,38 +49,24 @@ Favorites functionality
 Continue the CarPark application.
 Please be creative and develop a unique layout.
 
-1. Make the app more presentable, add css styles or add a theme
+1. Extend the search bar to search cars by manufacturer / model / etc. (Only frontend)
 
-2. Add filtering and pagination from API
+2. Implement add to basket functionality and create a basket page that must contain the list of vehicles with details and images and the totals.
 
-3. Add filter functionality for the list of cars. Examples: construction year, price etc. (Only frontend)
+3. Define the navigation menu for the application.
 
-4. Extend the search bar to search cars by manufacturer / model / etc. (Only frontend)
+4. Save the basket items and the list of orders to local storage.
 
-5. Add the possibility of sorting / ordering / pagination of the list of cars.
+5. Use the API endpoint for search.
 
-6. Implement add to basket functionality and create a basket page that must contain the list of vehicles with details and images and the totals.
+6. Use the API for the basket functionality (add, remove, etc.)
 
-7. Define the navigation menu for the application.
+7. Use the API for the favorites functionality (add, remove, etc.)
 
-8. Use the API for the filter / search functionality (followup from 2 & 3)
+8. Implement quick view with more details for cars (modal / dialog). (Move car information from row to modal).
 
-9. Define a global theme for the application. (different color schemes, dark mode, etc)
+9. Create an admin page to manage cars
 
-10. Save the basket items and the list of orders to local storage.
+10. Integrate the image upload functionality in the process of saving a new car.
 
-11. Use the API endpoint for filtering, search and sorting.
-
-12. Use the API for the basket functionality (add, remove, etc.)
-
-13. Use the API for the favorites functionality (add, remove, etc.)
-
-14. Implement quick view with more details for cars (modal / dialog). (Move car information from row to modal).
-
-15. Create an admin page to manage cars
-
-16. Integrate the image upload functionality in the process of saving a new car.
-
-17. Add banners, promotions in the application.
-
-18. Use a library of UI components.
+11. Add banners, promotions in the application.

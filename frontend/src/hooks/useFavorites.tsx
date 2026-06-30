@@ -1,4 +1,4 @@
-import type { Car } from "../models/car";
+import type { Car } from "../models/Car";
 
 export const useFavorites = () => {
     return {

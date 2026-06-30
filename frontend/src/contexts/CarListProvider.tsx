@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import type { PropsWithChildren } from "react";
-import { getCars, type GetCarsParams } from "../data/car";
-import type { Car } from "../models/car";
+import { getCars, type GetCarsParams, type SortOrder } from "../data/car";
+import type { Car } from "../models/Car";
 import { CarListContext } from "./CarListContext";
 import { useFilters } from "../hooks/useFilters";
 
 export function CarListProvider({ children }: PropsWithChildren) {
     const [carsList, setCarsList] = useState<Car[]>([]);
 
-    const { filters, page, limit, setNumTotalPages } = useFilters();
+    const { filters, page, limit, sort, setNumTotalPages } = useFilters();
 
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -18,10 +18,21 @@ export function CarListProvider({ children }: PropsWithChildren) {
         setIsError(false);
 
         try {
+            let sortKey =
+                sort === ""
+                    ? undefined
+                    : (sort.substring(0, sort.lastIndexOf("|")) as keyof Car);
+            let orderKey =
+                sort === ""
+                    ? undefined
+                    : (sort.substring(sort.lastIndexOf("|") + 1) as SortOrder);
+
             const carParams: GetCarsParams = {
-                filters: filters,
+                filters,
                 page,
                 limit,
+                sort: sortKey,
+                order: orderKey,
             };
 
             const result = await getCars(carParams);
@@ -36,7 +47,7 @@ export function CarListProvider({ children }: PropsWithChildren) {
 
     useEffect(() => {
         getCarList();
-    }, [page, limit]);
+    }, [page, limit, sort, filters]);
 
     const context = {
         carsList,

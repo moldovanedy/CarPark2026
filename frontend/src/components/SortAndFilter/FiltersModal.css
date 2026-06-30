@@ -1,0 +1,43 @@
+.filters-modal-main-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    row-gap: 15px;
+    margin: 10px 0;
+}
+
+.composite-fields__parent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-fields__parent {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .filters-modal-main-content {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        row-gap: 15px;
+    }
+
+    .composite-fields__parent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .checkbox-fields__parent {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

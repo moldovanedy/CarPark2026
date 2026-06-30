@@ -1,3 +1,3 @@
-import type { Car } from "./car";
+import type { Car } from "./Car";
 
-export type Basket = Car
+export type Basket = Car;

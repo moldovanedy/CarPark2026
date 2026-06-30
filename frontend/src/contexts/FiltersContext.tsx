@@ -1,13 +1,23 @@
 import { createContext, type Dispatch, type SetStateAction } from "react";
 
 export type Filters = {
-    manufacturer: string;
+    manufacturers?: string[];
+    models?: string[];
+    minPrice?: number;
+    maxPrice?: number;
+    minMileage?: number;
+    maxMileage?: number;
+    minConstructionYear?: number;
+    maxConstructionYear?: number;
+    minEngineSize?: number;
+    maxEngineSize?: number;
+    fuelTypes?: ("petrol" | "diesel" | "electric")[];
+    gearboxes?: ("manual" | "automatic")[];
 };
 
 export type FiltersContextType = {
     filters: Filters;
-    setFilters: React.Dispatch<React.SetStateAction<Filters>>;
-    updateFilter: (field: keyof Filters, value: string) => void;
+    setFilters: Dispatch<SetStateAction<Filters>>;
     resetFilters: () => void;
 
     page: number;
@@ -16,6 +26,9 @@ export type FiltersContextType = {
     setNumTotalPages: Dispatch<SetStateAction<number>>;
     limit: number;
     setLimit: Dispatch<SetStateAction<number>>;
+
+    sort: string;
+    setSort: Dispatch<SetStateAction<string>>;
 
     showFavoritesOnly: boolean;
     handleFavoritesToggle: (checked: boolean) => void;

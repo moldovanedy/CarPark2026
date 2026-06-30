@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useFilters } from "../../hooks/useFilters";
 import "./Pagination.css";
 import { Button } from "@mui/material";
+import { useCarsList } from "../../hooks/useCarsList";
 
 export function Pagination() {
     const [pagesArray, setPagesArray] = useState<number[]>([]);
@@ -10,6 +11,7 @@ export function Pagination() {
         useState<boolean>(false);
 
     const { page, setPage, numTotalPages } = useFilters();
+    const { carsList } = useCarsList();
 
     useEffect(() => {
         let arr = [];
@@ -35,7 +37,7 @@ export function Pagination() {
         }
 
         setPagesArray(arr);
-    }, []);
+    }, [carsList]);
 
     return (
         <div className="pagination">

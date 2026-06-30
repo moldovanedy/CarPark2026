@@ -1,4 +1,4 @@
-import type { Car } from "../../models/car";
+import type { Car } from "../../models/Car";
 import "./CarItem.css";
 import { useFavorites } from "../../hooks/useFavorites";
 import { IMG_BASE_URL } from "../../data/constants";
