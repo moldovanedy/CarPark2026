@@ -49,12 +49,14 @@ export async function getCars(
 
         switch (key) {
             case "manufacturers":
-            case "models":
             case "fuelTypes":
             case "gearboxes": {
-                let fieldName = key.substring(0, key.length - 1);
+                let fieldName =
+                    key === "gearboxes"
+                        ? "gearbox"
+                        : key.substring(0, key.length - 1);
                 (value as string[]).forEach((val) => {
-                    query.set(`${fieldName}`, val);
+                    query.append(`${fieldName}`, val);
                 });
 
                 break;

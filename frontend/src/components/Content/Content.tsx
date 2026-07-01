@@ -1,7 +1,7 @@
 import "./Content.css";
 import { CarItem } from "../CarItem/CarItem";
 import { Header } from "../Header/Header";
-import { SortingPanel } from "../SortAndFilter/SortingPanel";
+import { SortingButton } from "../SortAndFilter/SortingButton";
 import { useCarsList } from "../../hooks/useCarsList";
 import { Pagination } from "../Pagination/Pagination";
 import { Grid } from "@mui/material";
@@ -14,9 +14,12 @@ export function Content() {
         <div className="content">
             <Header />
 
-            <div className="filter-and-sort">
-                <FiltersButton />
-                <SortingPanel />
+            <div className="actions-bar">
+                <div className="filter-and-sort">
+                    <FiltersButton />
+                    <SortingButton />
+                </div>
+
                 <Pagination />
             </div>
 
@@ -35,10 +38,7 @@ export function Content() {
                 </Grid>
             )}
 
-            <div
-                className="filter-and-sort"
-                style={{ justifyContent: "flex-end" }}
-            >
+            <div className="actions-bar" style={{ justifyContent: "flex-end" }}>
                 <Pagination />
             </div>
         </div>

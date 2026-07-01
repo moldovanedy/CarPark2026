@@ -4,11 +4,26 @@
     gap: 0.5rem;
 }
 
-.filter-and-sort {
+.actions-bar {
     width: calc(100% - 32px);
     margin: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     align-self: center;
+}
+
+.filter-and-sort {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .actions-bar {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-end;
+    }
 }

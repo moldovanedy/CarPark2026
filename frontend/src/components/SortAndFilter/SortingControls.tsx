@@ -20,11 +20,11 @@ const SORT_FIELDS: { value: string; label: string }[] = [
 
 const PAGE_SIZES = [10, 20, 50, 100];
 
-export function SortingPanel() {
+export function SortingControls() {
     const { limit, setLimit, sort, setSort } = useFilters();
 
     return (
-        <div style={{ display: "flex", flexDirection: "row", gap: 15 }}>
+        <>
             <FormControl>
                 <InputLabel id="sort-by-label">Sort by</InputLabel>
                 <Select
@@ -68,6 +68,6 @@ export function SortingPanel() {
                     ))}
                 </Select>
             </FormControl>
-        </div>
+        </>
     );
 }

@@ -1,8 +1,10 @@
 import { createContext, type Dispatch, type SetStateAction } from "react";
 
+export type FilterFuelType = "Petrol" | "Diesel" | "Electric";
+export type FilterGearboxType = "Manual" | "Automatic";
+
 export type Filters = {
     manufacturers?: string[];
-    models?: string[];
     minPrice?: number;
     maxPrice?: number;
     minMileage?: number;
@@ -11,8 +13,8 @@ export type Filters = {
     maxConstructionYear?: number;
     minEngineSize?: number;
     maxEngineSize?: number;
-    fuelTypes?: ("petrol" | "diesel" | "electric")[];
-    gearboxes?: ("manual" | "automatic")[];
+    fuelTypes?: FilterFuelType[];
+    gearboxes?: FilterGearboxType[];
 };
 
 export type FiltersContextType = {

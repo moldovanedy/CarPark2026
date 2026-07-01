@@ -66,8 +66,13 @@ export function FiltersButton() {
     }, [filters]);
 
     return (
-        <div style={{ display: "flex", alignItems: "center" }}>
-            <span>Filters:</span>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+            }}
+        >
             <Badge
                 badgeContent={numFiltersApplied}
                 overlap="circular"
@@ -82,6 +87,7 @@ export function FiltersButton() {
                     <FilterAltOutlined />
                 </IconButton>
             </Badge>
+            <span>Filters</span>
 
             <FiltersModal
                 isOpened={isModalOpened}

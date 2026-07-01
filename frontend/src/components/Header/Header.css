@@ -1,4 +1,4 @@
-.filtersPanel {
+.main-header {
     position: sticky;
     top: 0;
     z-index: 500;
@@ -12,4 +12,17 @@
     align-items: center;
     gap: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-action-zone {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+@media screen and (max-width: 600px) {
+    .header-action-zone {
+        justify-content: flex-end;
+    }
 }
