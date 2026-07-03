@@ -61,7 +61,7 @@ export function SortingButton() {
                     }}
                 >
                     <h2 style={{ textAlign: "center", marginTop: 0 }}>
-                        Sorting
+                        Sort cars
                     </h2>
 
                     <SortingControls />

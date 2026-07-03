@@ -5,12 +5,40 @@ import ShoppingCart from "@mui/icons-material/ShoppingCart";
 import Favorite from "@mui/icons-material/Favorite";
 import { useWindowDimensions } from "../../hooks/useWindowDimensions";
 import { SearchBar } from "./SearchBar";
-import { SearchOutlined } from "@mui/icons-material";
+import { ArrowBack, SearchOutlined } from "@mui/icons-material";
+import { useEffect, useState } from "react";
 
 const SEARCH_BAR_BREAKPOINT = 600;
 
+function OtherActions() {
+    return (
+        <>
+            <IconButton>
+                <Favorite />
+            </IconButton>
+
+            <IconButton>
+                {/* TODO: dynamic badge content */}
+                <Badge badgeContent="2" color="secondary">
+                    <ShoppingCart />
+                </Badge>
+            </IconButton>
+
+            <ThemeSelector />
+        </>
+    );
+}
+
 export function Header() {
+    const [isSearchOpened, setIsSearchOpened] = useState(false);
+    const [currentValue, setCurrentValue] = useState<string | undefined>();
     const { width: windowWidth } = useWindowDimensions();
+
+    useEffect(() => {
+        if (windowWidth > SEARCH_BAR_BREAKPOINT) {
+            setIsSearchOpened(false);
+        }
+    }, [windowWidth]);
 
     return (
         <div className="main-header">
@@ -19,27 +47,43 @@ export function Header() {
             <div className="header-action-zone">
                 {windowWidth > SEARCH_BAR_BREAKPOINT ? (
                     <>
-                        <SearchBar />
+                        <SearchBar
+                            currentValue={currentValue}
+                            setCurrentValue={setCurrentValue}
+                            setIsSearchOpened={setIsSearchOpened}
+                        />
                         <div style={{ width: 3 }}></div>
+                        <OtherActions />
+                    </>
+                ) : isSearchOpened ? (
+                    <>
+                        <SearchBar
+                            currentValue={currentValue}
+                            setCurrentValue={setCurrentValue}
+                            setIsSearchOpened={setIsSearchOpened}
+                        />
+
+                        <IconButton
+                            onClick={() => {
+                                setIsSearchOpened(false);
+                            }}
+                        >
+                            <ArrowBack />
+                        </IconButton>
                     </>
                 ) : (
-                    <IconButton>
-                        <SearchOutlined />
-                    </IconButton>
+                    <>
+                        <IconButton
+                            onClick={() => {
+                                setIsSearchOpened(true);
+                            }}
+                        >
+                            <SearchOutlined />
+                        </IconButton>
+
+                        <OtherActions />
+                    </>
                 )}
-
-                <IconButton>
-                    <Favorite />
-                </IconButton>
-
-                <IconButton>
-                    {/* TODO: dynamic badge content */}
-                    <Badge badgeContent="2" color="secondary">
-                        <ShoppingCart />
-                    </Badge>
-                </IconButton>
-
-                <ThemeSelector />
             </div>
         </div>
     );

@@ -5,6 +5,14 @@ import type { Filters } from "../contexts/FiltersContext";
 
 export type SortOrder = "asc" | "desc";
 
+export const SearchableKeys: (keyof Car)[] = [
+    "manufacturer",
+    "model",
+    "constructionYear",
+    "fuelType",
+    "gearbox",
+];
+
 export type GetCarsParams = {
     sort?: keyof Car;
     order?: SortOrder;
@@ -48,6 +56,23 @@ export async function getCars(
         }
 
         switch (key) {
+            case "searchString": {
+                let term = value as string;
+                if (term.length === 0) {
+                    break;
+                }
+
+                //search in all these categories
+                //TODO: fix this
+
+                // SearchableKeys.forEach((key) => {
+                //     query.append(`${key}_q`, term);
+                // });
+
+                query.append(`q`, term);
+                break;
+            }
+
             case "manufacturers":
             case "fuelTypes":
             case "gearboxes": {
