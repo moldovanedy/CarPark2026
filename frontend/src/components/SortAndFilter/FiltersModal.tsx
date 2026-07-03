@@ -1,13 +1,15 @@
 import {
     Autocomplete,
-    Box,
     Button,
     Checkbox,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
     FormControl,
     FormControlLabel,
     FormGroup,
     FormLabel,
-    Modal,
     TextField,
 } from "@mui/material";
 import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
@@ -529,76 +531,53 @@ export function FiltersModal(props: {
     const { setFilters } = useFilters();
 
     return (
-        <Modal
+        <Dialog
             open={props.isOpened}
             onClose={() => {
                 props.setIsOpened(false);
             }}
         >
-            <Box
-                sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    minWidth: 320,
-                    width: "70%",
-                    maxHeight: "70vh",
-                    maxWidth: "90vw",
-                    bgcolor: "background.paper",
-                    border: "2px solid #000",
-                    boxShadow: 24,
-                    borderRadius: 2,
-                    p: 4,
-                    display: "flex",
-                    flexDirection: "column",
-                    overflow: "hidden",
-                }}
-            >
-                <h2 style={{ textAlign: "center", marginTop: 0 }}>Filters</h2>
+            <DialogTitle>Filters</DialogTitle>
 
-                <div style={{ overflowY: "auto", flex: 1, minHeight: 0 }}>
-                    <div className="filters-modal-main-content">
-                        <ManufacturersFilter />
+            <DialogContent>
+                <div className="filters-modal-main-content">
+                    <ManufacturersFilter />
 
-                        <PriceFilter />
-                        <MileageFilter />
-                        <ConstructionYearFilter />
-                        <EngineSizeFilter />
-                    </div>
-
-                    <div className="checkbox-fields__parent">
-                        <FuelTypesFilter />
-                        <GearboxesFilter />
-                    </div>
+                    <PriceFilter />
+                    <MileageFilter />
+                    <ConstructionYearFilter />
+                    <EngineSizeFilter />
                 </div>
 
-                <div style={{ width: "100%", marginTop: 25, flexShrink: 0 }}>
-                    <div style={{ float: "right", display: "flex", gap: 15 }}>
-                        <Button
-                            variant="outlined"
-                            color="error"
-                            onClick={() => {
-                                setFilters({});
-                                props.setIsOpened(false);
-                            }}
-                        >
-                            Clear filters
-                        </Button>
+                <div className="checkbox-fields__parent">
+                    <FuelTypesFilter />
+                    <GearboxesFilter />
+                </div>
+            </DialogContent>
 
-                        <Button
-                            variant="contained"
-                            onClick={() => {
-                                props.setIsOpened(false);
-                            }}
-                        >
-                            {/* TODO: get the total number of results possible (might not be possible to to efficiently 
+            <DialogActions>
+                <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={() => {
+                        setFilters({});
+                        props.setIsOpened(false);
+                    }}
+                >
+                    Clear filters
+                </Button>
+
+                <Button
+                    variant="contained"
+                    onClick={() => {
+                        props.setIsOpened(false);
+                    }}
+                >
+                    {/* TODO: get the total number of results possible (might not be possible to to efficiently 
                             since the server does not return this value, only the entire dataset, which is not OK) */}
-                            Show results
-                        </Button>
-                    </div>
-                </div>
-            </Box>
-        </Modal>
+                    Show results
+                </Button>
+            </DialogActions>
+        </Dialog>
     );
 }

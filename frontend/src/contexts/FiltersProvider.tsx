@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import type { Filters, FiltersContextType } from "./FiltersContext";
 import { FiltersContext } from "./FiltersContext";
 
-const defaultFilters: Filters = {};
+const defaultFilters: Filters = { searchString: "" };
 
 export function FiltersProvider({ children }: PropsWithChildren) {
     const [page, setPage] = useState<number>(1);
