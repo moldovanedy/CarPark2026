@@ -1,0 +1,52 @@
+.car-dialog__top-title {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3.5em;
+}
+
+.car-dialog__favorite-button-wrapper {
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.car-dialog__general-details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+.car-dialog__general-details-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.car-dialog__overview-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.car-dialog__features-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    row-gap: 10px;
+    max-width: 850px;
+    margin-top: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .car-dialog__overview-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

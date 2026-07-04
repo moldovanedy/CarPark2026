@@ -1,30 +1,27 @@
 import type { Car } from "../../models/Car";
 import "./CarItem.css";
-import { useFavorites } from "../../hooks/useFavorites";
 import { IMG_BASE_URL } from "../../data/constants";
-import {
-    Button,
-    Card,
-    CardContent,
-    CardMedia,
-    Grid,
-    IconButton,
-    Typography,
-} from "@mui/material";
-import Favorite from "@mui/icons-material/Favorite";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import { ShoppingCart } from "@mui/icons-material";
+import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { useState } from "react";
+import { CarDetailsDialog } from "../CarDetailsDialog/CarDetailsDialog";
+import { AddToCartButton } from "../AddToCartButton";
+import { ToggleFavoriteButton } from "../ToggleFavoriteButton";
+import { formatNumber } from "../../utils/NumberFormatter";
 
 type Props = {
     car: Car;
 };
 
 export function CarItem({ car }: Props) {
-    const { toggleFavorite, isFavorite } = useFavorites();
+    const [isDetailsDialogOpened, setIsDetailsDialogOpened] = useState(false);
 
     return (
         <Grid>
-            <Card variant="elevation" className="card">
+            <Card
+                onClick={() => setIsDetailsDialogOpened(true)}
+                variant="elevation"
+                className="card"
+            >
                 <div style={{ position: "relative" }}>
                     <CardMedia
                         component="img"
@@ -33,13 +30,7 @@ export function CarItem({ car }: Props) {
                     />
 
                     <div className="card__favorite-button-wrapper">
-                        <IconButton onClick={() => toggleFavorite(car)}>
-                            {isFavorite(car) ? (
-                                <Favorite color="error" />
-                            ) : (
-                                <FavoriteBorder color="error" />
-                            )}
-                        </IconButton>
+                        <ToggleFavoriteButton car={car} />
                     </div>
                 </div>
 
@@ -49,9 +40,10 @@ export function CarItem({ car }: Props) {
                     </Typography>
 
                     <Typography sx={{ marginBottom: 1 }}>
-                        {car.fuelType} &#x2022; {car.mileage} km &#x2022;{" "}
+                        {car.fuelType} &#x2022; {formatNumber(car.mileage)} km
+                        &#x2022;{" "}
                         {car.engineSize != 0 ? (
-                            <>{car.engineSize} cm3 &#x2022;</>
+                            <>{formatNumber(car.engineSize)} cm3 &#x2022;</>
                         ) : (
                             <></>
                         )}{" "}
@@ -62,18 +54,21 @@ export function CarItem({ car }: Props) {
 
                     <div className="row" style={{ justifyContent: "flex-end" }}>
                         <Typography className="price">
-                            {car.price} EUR
+                            {formatNumber(car.price)} EUR
                         </Typography>
 
                         <div style={{ flexGrow: 1 }}></div>
 
-                        <Button variant="contained">
-                            <ShoppingCart />
-                            <span>Add to cart</span>
-                        </Button>
+                        <AddToCartButton />
                     </div>
                 </CardContent>
             </Card>
+
+            <CarDetailsDialog
+                car={car}
+                isModalOpened={isDetailsDialogOpened}
+                setIsModalOpened={setIsDetailsDialogOpened}
+            />
         </Grid>
     );
 }
