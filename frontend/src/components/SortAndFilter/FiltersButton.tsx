@@ -17,9 +17,6 @@ export function FiltersButton() {
         ) {
             numFilters++;
         }
-        if (filters.models !== undefined && filters.models.length > 0) {
-            numFilters++;
-        }
 
         if (filters.minPrice !== undefined && filters.minPrice >= 0) {
             numFilters++;
