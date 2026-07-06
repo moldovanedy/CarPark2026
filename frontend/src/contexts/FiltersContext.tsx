@@ -4,7 +4,7 @@ export type FilterFuelType = "Petrol" | "Diesel" | "Electric";
 export type FilterGearboxType = "Manual" | "Automatic";
 
 export type Filters = {
-    searchString?: string;
+    searchString: string;
     manufacturers?: string[];
     minPrice?: number;
     maxPrice?: number;

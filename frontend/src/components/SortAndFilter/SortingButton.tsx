@@ -1,4 +1,11 @@
-import { Box, Button, IconButton, Modal } from "@mui/material";
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+} from "@mui/material";
 import { useWindowDimensions } from "../../hooks/useWindowDimensions";
 import { SortingControls } from "./SortingControls";
 import { Sort } from "@mui/icons-material";
@@ -35,37 +42,28 @@ export function SortingButton() {
             </IconButton>
             <span>Sort</span>
 
-            <Modal
+            <Dialog
                 open={isModalOpened}
                 onClose={() => {
                     setIsModalOpened(false);
                 }}
             >
-                <Box
-                    sx={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        minWidth: 180,
-                        maxHeight: "70vh",
-                        maxWidth: "90vw",
-                        bgcolor: "background.paper",
-                        border: "2px solid #000",
-                        boxShadow: 24,
-                        borderRadius: 2,
-                        p: 4,
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 3,
-                    }}
-                >
-                    <h2 style={{ textAlign: "center", marginTop: 0 }}>
-                        Sort cars
-                    </h2>
+                <DialogTitle>Sort cars</DialogTitle>
 
-                    <SortingControls />
+                <DialogContent>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: 15,
+                            marginTop: 8,
+                        }}
+                    >
+                        <SortingControls />
+                    </div>
+                </DialogContent>
 
+                <DialogActions>
                     <Button
                         variant="contained"
                         onClick={() => {
@@ -74,8 +72,8 @@ export function SortingButton() {
                     >
                         Apply
                     </Button>
-                </Box>
-            </Modal>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

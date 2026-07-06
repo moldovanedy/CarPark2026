@@ -31,7 +31,7 @@ function OtherActions() {
 
 export function Header() {
     const [isSearchOpened, setIsSearchOpened] = useState(false);
-    const [currentValue, setCurrentValue] = useState<string | undefined>();
+    const [currentValue, setCurrentValue] = useState<string>("");
     const { width: windowWidth } = useWindowDimensions();
 
     useEffect(() => {
@@ -78,7 +78,13 @@ export function Header() {
                                 setIsSearchOpened(true);
                             }}
                         >
-                            <SearchOutlined />
+                            {(currentValue.length ?? 0) > 0 ? (
+                                <Badge variant="dot" color="secondary">
+                                    <SearchOutlined />
+                                </Badge>
+                            ) : (
+                                <SearchOutlined />
+                            )}
                         </IconButton>
 
                         <OtherActions />

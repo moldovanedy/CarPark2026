@@ -14,8 +14,8 @@ import { SearchableKeys } from "../../data/car";
 const DEBOUNCE_MILLISECONDS = 500;
 
 export function SearchBar(params: {
-    currentValue: string | undefined;
-    setCurrentValue: Dispatch<SetStateAction<string | undefined>>;
+    currentValue: string;
+    setCurrentValue: Dispatch<SetStateAction<string>>;
     setIsSearchOpened: Dispatch<SetStateAction<boolean>>;
 }) {
     const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -60,11 +60,6 @@ export function SearchBar(params: {
     }
 
     function search(isFromSubmit?: boolean) {
-        if (params.currentValue?.length === 0) {
-            setFilters({ ...filters, searchString: undefined });
-            return;
-        }
-
         if (filters.searchString !== params.currentValue) {
             setFilters({ ...filters, searchString: params.currentValue });
         }
@@ -75,7 +70,7 @@ export function SearchBar(params: {
     }
 
     useEffect(() => {
-        if (params.currentValue?.length === 0) {
+        if (params.currentValue.length === 0) {
             setSuggestions(ManufacturersList);
         }
     }, []);
