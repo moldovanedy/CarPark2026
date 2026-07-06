@@ -6,6 +6,8 @@ import { useCarsList } from "../../hooks/useCarsList";
 import { Pagination } from "../Pagination/Pagination";
 import { Grid } from "@mui/material";
 import { FiltersButton } from "../SortAndFilter/FiltersButton";
+import { LoaderComponent } from "../shared/LoaderComponent";
+import { ErrorMessage } from "../shared/ErrorMessage";
 
 export function Content() {
     const { carsList, isLoading, isError } = useCarsList();
@@ -23,8 +25,8 @@ export function Content() {
                 <Pagination />
             </div>
 
-            {isLoading && <p>Data is loading...</p>}
-            {isError && <p>Something went wrong</p>}
+            {isLoading && <LoaderComponent />}
+            {isError && <ErrorMessage />}
 
             {!isLoading && !isError && (
                 <Grid
