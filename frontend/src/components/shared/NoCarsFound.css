@@ -1,0 +1,12 @@
+.no-cars__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.no-cars__container h2,
+.no-cars__container p {
+    text-align: center;
+}

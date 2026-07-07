@@ -53,7 +53,9 @@ export function Pagination() {
         setPagesArray(arr);
     }, [carsList, numTotalPages, page, windowWidth]);
 
-    return (
+    return numTotalPages <= 1 ? (
+        <></>
+    ) : (
         <div className="pagination">
             <span style={{ fontWeight: "bold" }}>Page:</span>
             <span></span>
