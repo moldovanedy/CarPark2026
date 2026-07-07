@@ -1,27 +1,40 @@
 import { Badge, IconButton } from "@mui/material";
 import "./Header.css";
 import { ThemeSelector } from "./ThemeSelector";
-import ShoppingCart from "@mui/icons-material/ShoppingCart";
-import Favorite from "@mui/icons-material/Favorite";
 import { useWindowDimensions } from "../../hooks/useWindowDimensions";
 import { SearchBar } from "./SearchBar";
-import { ArrowBack, SearchOutlined } from "@mui/icons-material";
+import { ArrowBack, Phone, SearchOutlined } from "@mui/icons-material";
 import { useEffect, useState } from "react";
+import { ContactDialog } from "./ContactDialog";
 
 const SEARCH_BAR_BREAKPOINT = 600;
 
 function OtherActions() {
+    const [isContactDialogOpen, setIsContactDialogOpen] = useState(false);
+
     return (
         <>
-            <IconButton>
+            {/* <IconButton>
                 <Favorite />
             </IconButton>
 
             <IconButton>
-                {/* TODO: dynamic badge content */}
                 <Badge badgeContent="2" color="secondary">
                     <ShoppingCart />
                 </Badge>
+            </IconButton> */}
+
+            <ContactDialog
+                isOpen={isContactDialogOpen}
+                setIsOpen={setIsContactDialogOpen}
+            />
+
+            <IconButton
+                onClick={() => {
+                    setIsContactDialogOpen(true);
+                }}
+            >
+                <Phone />
             </IconButton>
 
             <ThemeSelector />

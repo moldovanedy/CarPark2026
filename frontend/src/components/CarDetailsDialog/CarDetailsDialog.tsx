@@ -12,9 +12,7 @@ import {
 import type { TransitionProps } from "@mui/material/transitions";
 import type { Dispatch, SetStateAction } from "react";
 import React from "react";
-import { AddToCartButton } from "../AddToCartButton";
 import type { Car } from "../../models/Car";
-import { ToggleFavoriteButton } from "../ToggleFavoriteButton";
 import "./CarDetailsDialog.css";
 import { IMG_BASE_URL } from "../../data/constants";
 import { useWindowDimensions } from "../../hooks/useWindowDimensions";
@@ -62,7 +60,7 @@ function Overview(props: { car: Car; carName: string }) {
                     Price: {formatNumber(props.car.price)} EUR
                 </Typography>
 
-                <div
+                {/* <div
                     style={{
                         display: "flex",
                         flexDirection: "row",
@@ -76,7 +74,7 @@ function Overview(props: { car: Car; carName: string }) {
                     </div>
 
                     <AddToCartButton />
-                </div>
+                </div> */}
             </div>
         </div>
     );

@@ -96,6 +96,11 @@ export function SearchBar(params: {
         <Autocomplete
             options={suggestions}
             value={params.currentValue}
+            onChange={(_, newValue, reason) => {
+                if (reason === "clear") {
+                    params.setCurrentValue(newValue ?? "");
+                }
+            }}
             sx={{ flexGrow: 1 }}
             getOptionLabel={(option) => option}
             freeSolo

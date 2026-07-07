@@ -4,8 +4,6 @@ import { IMG_BASE_URL } from "../../data/constants";
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import { CarDetailsDialog } from "../CarDetailsDialog/CarDetailsDialog";
-import { AddToCartButton } from "../AddToCartButton";
-import { ToggleFavoriteButton } from "../ToggleFavoriteButton";
 import { formatNumber } from "../../utils/NumberFormatter";
 
 type Props = {
@@ -29,9 +27,9 @@ export function CarItem({ car }: Props) {
                         src={`${IMG_BASE_URL}/${car.image}`}
                     />
 
-                    <div className="card__favorite-button-wrapper">
+                    {/* <div className="card__favorite-button-wrapper">
                         <ToggleFavoriteButton car={car} />
-                    </div>
+                    </div> */}
                 </div>
 
                 <CardContent className="card__content">
@@ -59,7 +57,7 @@ export function CarItem({ car }: Props) {
 
                         <div style={{ flexGrow: 1 }}></div>
 
-                        <AddToCartButton />
+                        {/* <AddToCartButton /> */}
                     </div>
                 </CardContent>
             </Card>
