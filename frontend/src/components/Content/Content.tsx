@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import { FiltersButton } from "../SortAndFilter/FiltersButton";
 import { LoaderComponent } from "../shared/LoaderComponent";
 import { ErrorMessage } from "../shared/ErrorMessage";
+import { NoCarsFound } from "../shared/NoCarsFound";
 
 export function Content() {
     const { carsList, isLoading, isError } = useCarsList();
@@ -34,9 +35,13 @@ export function Content() {
                     spacing={2}
                     sx={{ justifyContent: "center", alignItems: "stretch" }}
                 >
-                    {carsList.map((car) => (
-                        <CarItem key={car.vin} car={car} />
-                    ))}
+                    {carsList.length <= 0 ? (
+                        <NoCarsFound />
+                    ) : (
+                        carsList.map((car) => (
+                            <CarItem key={car.vin} car={car} />
+                        ))
+                    )}
                 </Grid>
             )}
 

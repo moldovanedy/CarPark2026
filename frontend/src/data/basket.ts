@@ -1,6 +1,6 @@
 import { apiHandle, HEADERS } from "./helper";
 import { API_BASE_URL } from "./constants";
-import type { Basket } from "../models/basket";
+import type { Basket } from "../models/Basket";
 
 /**
  * Gets all cars
